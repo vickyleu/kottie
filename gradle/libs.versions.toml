@@ -39,4 +39,3 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "klint" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

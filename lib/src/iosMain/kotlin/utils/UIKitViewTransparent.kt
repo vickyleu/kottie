@@ -60,7 +60,6 @@ import kotlinx.coroutines.Dispatchers
 import org.jetbrains.skia.Canvas
 import org.jetbrains.skiko.OS
 import org.jetbrains.skiko.OSVersion
-import org.jetbrains.skiko.SkikoKeyboardEvent
 import org.jetbrains.skiko.SkikoUIView
 import platform.CoreGraphics.CGPoint
 import org.jetbrains.skiko.available
