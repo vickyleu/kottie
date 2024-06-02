@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.dokka)
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -38,7 +39,6 @@ kotlin {
             }
         }
     }
-
     listOf(
         iosX64(),
         iosSimulatorArm64()
@@ -55,9 +55,9 @@ kotlin {
 
 
     sourceSets {
-
         val commonMain by getting {
             dependencies {
+                implementation(project.dependencies.platform(libs.ktor.bom))
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
@@ -128,11 +128,11 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlin {
-        jvmToolchain(11)
+        jvmToolchain(17)
     }
 }
 

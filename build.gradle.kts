@@ -6,10 +6,20 @@ plugins {
     alias(libs.plugins.jetbrainsCompose) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.mavenPublish) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.kotlinCocoapods) apply false
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
 }
-
+allprojects {
+    if (tasks.findByName("testClasses") == null) {
+        try {
+            tasks.register("testClasses")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint") // Version should be inherited from parent
 
