@@ -34,7 +34,8 @@ kotlin {
         compilations.getByName("main") {
             val Lottie by cinterops.creating {
                 defFile("src/nativeInterop/cinterop/Lottie.def")
-                val path = "$rootDir/vendor/Lottie.xcframework/ios-arm64"
+                val path = "${project.projectDir.parentFile.absolutePath}/vendor/Lottie.xcframework/ios-arm64"
+                println("path: $path")
                 compilerOpts("-F$path", "-framework", "Lottie", "-rpath", path)
                 extraOpts += listOf("-compiler-option", "-fmodules")
             }
@@ -47,7 +48,7 @@ kotlin {
         it.compilations.getByName("main") {
             val Lottie by cinterops.creating {
                 defFile("src/nativeInterop/cinterop/Lottie.def")
-                val path = "$rootDir/vendor/Lottie.xcframework/ios-arm64_x86_64-simulator"
+                val path = "${project.projectDir.parentFile.absolutePath}/vendor/Lottie.xcframework/ios-arm64_x86_64-simulator"
                 compilerOpts("-F$path", "-framework", "Lottie", "-rpath", path)
                 extraOpts += listOf("-compiler-option", "-fmodules")
             }
