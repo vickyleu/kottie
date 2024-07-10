@@ -1,7 +1,6 @@
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-import org.jetbrains.kotlin.konan.target.linker
 import java.util.Properties
 
 plugins {
@@ -117,7 +116,11 @@ kotlin {
 
     }
 }
-
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "org.airbnb.fork.kottie"
+    generateResClass = never
+}
 android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     namespace = "com.myapplication.common"

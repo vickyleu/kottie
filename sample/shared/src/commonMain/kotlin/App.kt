@@ -8,20 +8,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kottie.sample.shared.generated.resources.Res
 import kottieComposition.KottieCompositionSpec
 import kottieComposition.animateKottieCompositionAsState
 import kottieComposition.rememberKottieComposition
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.InternalResourceApi
+import org.jetbrains.compose.resources.readResourceBytes
 import utils.KottieConstants
 
 
+@OptIn(InternalResourceApi::class, ExperimentalResourceApi::class)
 @Composable
 fun App(
     modifier: Modifier = Modifier,
 ) {
-
-
+    val currentResourceDir = "composeResources/kottie.sample.shared.generated.resources"
     val composition = rememberKottieComposition(
-        spec = KottieCompositionSpec.Url("https://lottie.host/0094976a-6a83-4795-b0ce-6da075ca5b6b/HSbPWOOaJV.json")
+        spec = KottieCompositionSpec.File("$currentResourceDir/files/Animation.json")
     )
 
     val animationState by animateKottieCompositionAsState(

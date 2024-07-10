@@ -21,6 +21,9 @@ android {
     namespace = "com.myapplication"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//    sourceSets["main"].resources {
+//        srcDirs("src/commonMain/composeResources")
+//    }
 
     defaultConfig {
         applicationId = "com.myapplication.MyApplication"
