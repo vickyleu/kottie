@@ -35,14 +35,8 @@ internal fun KLottieAnimation(
                 update = { view ->
                     view.backgroundColor =  UIColor.clearColor
                     view.opaque = true
-                    composition.translatesAutoresizingMaskIntoConstraints = false
                     view.addSubview(composition)
-                    NSLayoutConstraint.activateConstraints(
-                        listOf(
-                            composition.widthAnchor.constraintEqualToAnchor(view.widthAnchor),
-                            composition.heightAnchor.constraintEqualToAnchor(view.heightAnchor)
-                        )
-                    )
+                    composition.setFrame(view.bounds)
                 },
                 background = backgroundColor
             )
