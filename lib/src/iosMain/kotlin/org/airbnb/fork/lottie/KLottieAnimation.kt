@@ -4,15 +4,20 @@ package org.airbnb.fork.lottie
 
 import Lottie.CompatibleAnimationView
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.interop.UIKitView
+import androidx.compose.ui.viewinterop.UIKitInteropInteractionMode
+import androidx.compose.ui.viewinterop.UIKitInteropProperties
+import androidx.compose.ui.viewinterop.UIKitView
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.UIKit.NSLayoutConstraint
 import platform.UIKit.UIColor
 import platform.UIKit.UIView
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun KLottieAnimation(
     modifier: Modifier,
@@ -26,7 +31,7 @@ internal fun KLottieAnimation(
             UIKitView(
                 factory = {
                     UIView().apply {
-                        this.backgroundColor = UIColor.clearColor
+                        this.backgroundColor = backgroundColor.toUIColor()
                         this.opaque = false
                         this.setClipsToBounds(true)
                     }
@@ -34,7 +39,7 @@ internal fun KLottieAnimation(
                 modifier = modifier,
                 update = { view ->
                     if(composition.superview == null) {
-                        view.backgroundColor =  UIColor.clearColor
+//                        view.backgroundColor =  UIColor.clearColor
                         view.opaque = true
                         composition.translatesAutoresizingMaskIntoConstraints = false
                         view.addSubview(composition)
@@ -46,9 +51,23 @@ internal fun KLottieAnimation(
                         )
                     }
                 },
-                background = backgroundColor
+                properties = UIKitInteropProperties(
+                    interactionMode=UIKitInteropInteractionMode.Cooperative(
+                        delayMillis = 1,
+                    ),
+                    isNativeAccessibilityEnabled = false
+                )
             )
         }
     }
+}
+
+private fun Color.toUIColor(): UIColor {
+    return UIColor.colorWithRed(
+        red = red.toDouble(),
+        green = green.toDouble(),
+        blue = blue.toDouble(),
+        alpha = alpha.toDouble()
+    )
 }
 
